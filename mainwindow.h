@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <Qt3DExtras/Qt3DWindow>
 
+#include <QTimer>
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,6 +22,7 @@ private:
     Ui::MainWindow *ui;
     QWidget *m_3d_window_container;
     Qt3DExtras::Qt3DWindow *m_3d_window;
+    QTimer timer;
 };
 
 #endif // MAINWINDOW_H

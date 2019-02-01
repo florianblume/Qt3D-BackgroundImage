@@ -9,7 +9,8 @@ FlippedTextureImage::FlippedTextureImage(Qt3DCore::QNode *parent) : Qt3DRender::
 }
 
 void FlippedTextureImage::paint(QPainter *painter) {
+    qDebug() << "Updating texture image.";
     int w = painter->device()->width();
     int h = painter->device()->height();
-    painter->drawImage(0, 0, QImage("/home/floretti/git/3DBackgroundImage/images/test.png"));
+    painter->drawImage(0, 0, QImage(":/test.png"));
 }

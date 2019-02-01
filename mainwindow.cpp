@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Set the new framegraph
     m_3d_window->setActiveFrameGraph(renderSurfaceSelector);
-    m_3d_window->renderSettings()->setRenderPolicy(Qt3DRender::QRenderSettings::OnDemand);
+    m_3d_window->renderSettings()->setRenderPolicy(Qt3DRender::QRenderSettings::Always);
 
     // Root
     Qt3DCore::QEntity *rootEntity = new Qt3DCore::QEntity();
@@ -116,6 +116,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_3d_window_container->setGeometry(this->geometry());
     m_3d_window_container->setParent(ui->centralWidget);
     planeTextureImage->update();
+
+    timer.setInterval(100);
+    connect(&timer, &QTimer::timeout, [planeTextureImage]() {
+        planeTextureImage->update();
+     });
+    timer.start();
 }
 
 MainWindow::~MainWindow()
