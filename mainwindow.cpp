@@ -19,6 +19,7 @@
 #include <Qt3DExtras/QTextureMaterial>
 #include <Qt3DRender/QTexture>
 #include <Qt3DRender/QRenderSettings>
+#include <QPropertyAnimation>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -105,7 +106,6 @@ MainWindow::MainWindow(QWidget *parent) :
     torusMaterial->setAmbient(Qt::gray);
     Qt3DCore::QTransform *torusTransform = new Qt3DCore::QTransform(torusEntity);
     torusTransform->setTranslation(QVector3D(0, 0, 10));
-    torusTransform->setRotationY(50);
     torusEntity->addComponent(torusTransform);
     torusEntity->addComponent(torusMesh);
     torusEntity->addComponent(torusMaterial);
@@ -117,9 +117,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_3d_window_container->setParent(ui->centralWidget);
     planeTextureImage->update();
 
-    timer.setInterval(100);
-    connect(&timer, &QTimer::timeout, [planeTextureImage]() {
-        planeTextureImage->update();
+    timer.setInterval(20);
+    connect(&timer, &QTimer::timeout, [torusTransform]() {
+        torusTransform->setRotationX(torusTransform->rotationX() + 1.5f);
      });
     timer.start();
 }
